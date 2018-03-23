@@ -1,0 +1,154 @@
+<!-- Juha Luukkonen - harjoitustyö, sivua ei päivitetä, eikä julkaista. -->
+<!DOCTYPE html>
+  <html lang="fi">
+  <html>
+    <title>CityTrack</title>
+    <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+      body, html {
+      height: 100%;
+      font-family: "Inconsolata", sans-serif;
+}
+      .bgimg {
+      background-position: center;
+      background-size: cover;
+      background-image: url("https://citytrack.fi/wp-content/themes/citytrack/assets/img/logo_border.png");
+      min-height: 75%;
+}
+      .menu {
+      display: none;
+}
+  </style>
+<body>
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block w3-black">MITÄ ON LÄHELLÄ?</a>
+      <p><button onclick="getLocation()">HAE</button>
+        <div id="mapholder"></div>
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyA0yCr6jsurG6tL2JOBJXqtPIcka9NQw08&callback=myMap"></script>
+                    <script>
+                      var x = document.getElementById("demo");
+                      function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition, showError);
+                        } else { 
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                        }
+                    }
+                        function showPosition(position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+                        var latlon = new google.maps.LatLng(lat, lon)
+                        var mapholder = document.getElementById('mapholder')
+                        mapholder.style.height = '250px';
+                        mapholder.style.width = '500px';
+                    
+                        var myOptions = {
+                        center:latlon,zoom:14,
+                        mapTypeId:google.maps.MapTypeId.ROADMAP,
+                        mapTypeControl:false,
+                        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+                        }
+                        var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+                        var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+                    }
+                        function showError(error) {
+                          switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                              x.innerHTML = "User denied the request for Geolocation."
+                              break;
+                            case error.POSITION_UNAVAILABLE:
+                              x.innerHTML = "Location information is unavailable."
+                              break;
+                            case error.TIMEOUT:
+                              x.innerHTML = "The request to get user location timed out."
+                              break;
+                            case error.UNKNOWN_ERROR:
+                              x.innerHTML = "An unknown error occurred."
+                              break;
+                    }
+                }     
+    </script>
+</div>
+    <div class="w3-col s3">
+      <a href="#CITYTRACK" class="w3-button w3-block w3-black">CITYTRACK</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#OSALLISTUJAT" class="w3-button w3-block w3-black">OSALLISTUJAT</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#OTA YHTEYTTÄ!" class="w3-button w3-block w3-black">OTA YHTEYTTÄ!</a>
+    </div>
+  </div>
+</div>
+<!-- Header with image -->
+  <header class="bgimg w3-display-container w3-grayscale-min" id="MITÄ ON LÄHELLÄ?">
+    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+      <span class="w3-tag">LÄHIALUEEN YRITYKSET?</span>
+  </div>
+
+    <div class="w3-display-middle w3-center">
+      <span class="w3-text-white" style="font-size:90px"><br></span>
+  </div>
+    <div class="w3-display-bottomright w3-center w3-padding-large">
+      <span class="w3-text-blue">CityTrackApp</span>
+  </div>
+</header>
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
+
+<!-- LATAA CITYTRACK APP -->
+<div class="w3-container" id="CITYTRACK">
+  <div class="w3-content" style="max-width:700px">
+    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">CITYTRACK</span></h5>
+    <li><a href="https://play.google.com/store/apps/details?id=com.ambientNav"target="_blank">LATAA ANDROID-SOVELLUS!</a></li>
+      <p>CityTrackApp tekee elämästäsi helpompaa. Kun sovellus on täysin valmis, se opastaa sinua Tampereen keskustassa sekä sisällä että ulkona. Tämän lisäksi CityTrackApp kertoo lähialueen kiinnostavista tapahtumista ja huikeista tarjouksista, jotka mahdollisesti kiinnostavat juuri sinua. </p>
+    <p></p>
+    <div class="w3-panel w3-leftbar w3-light-grey">
+      <p><i></i></p>
+      <p></p>
+    </div>
+    <img src="https://citytrack.fi/wp-content/themes/citytrack/assets/img/logo_border.png" style="width:100%;max-width:1000px" class="w3-margin-top">
+    
+</div>
+<!-- Osallistuja linkitykset -->
+<div class="w3-container" id="OSALLISTUJAT">
+  <div class="w3-content" style="max-width:700px">
+ 
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">OSALLISTUJAT</span></h5>
+  
+    <div class="w3-row w3-center w3-card w3-padding">
+      <a href="javascript:void(0)" onclick="openMenu();" id="myLink">
+        <div class>
+            <li><a href="https:/citytrack.fi"target="_blank">CITYTRACK</a></li>
+            <li><a href="https://www.here.com/en"target="_blank">HERE</a></li>
+            <li><a href="https:/uta.fi"target="_blank">TAY</a></li>
+            <li><a href="https://www.tut.fi/"target="_blank">TUT</a></li>
+            <li><a href="https://www.tamk.fi/"target="_blank">TAMK</a></li>
+        </div>
+    <img src="https://citytrack.fi/wp-content/themes/citytrack/assets/img/logo_border.png" style="width:100%;max-width:1000px;margin-top:32px;">
+  </div>
+</div>
+<!-- Ota yhteyttä -->
+<div class="w3-container" id="OTA YHTEYTTÄ!" style="padding-bottom:32px;">
+  <div class="w3-content" style="max-width:700px">
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">OTA YHTEYTTÄ!</span></h>
+    <p><span class="w3-tag">HEI!</span> Oletko kiinnostunut CityTrack yrityspaikannuksesta tai haluatko organisaatiosi mukaan?</p>
+
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="NIMI" required name="NIMI"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="SÄHKÖPOSTI" required name="SÄHKÖPOSTI"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="PUHELINNUMERO" required name="PUHELINNUMERO"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="VIESTISI" required name="VIESTISI"></p>
+      <p><button class="w3-button w3-black" type="submit">LÄHETÄ VIESTI</button></p>
+    </form>
+  </div>
+  </div>
+ </div>
+</body>
+</html>
